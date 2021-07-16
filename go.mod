@@ -1,3 +1,3 @@
-module github.com/grevicoc/search-engine-extended
+module search-engine-extended
 
 go 1.16
