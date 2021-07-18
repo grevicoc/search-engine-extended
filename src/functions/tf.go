@@ -4,6 +4,7 @@ import (
 
 )
 
+//fungsi untuk menghitung suatu dokumen ada kata apa saja dan jumlahnya berapa
 func countWords(doc string) (map[string]int, error){
 	//inisialisasi retval
 	var retVal map[string]int = map[string]int{}
