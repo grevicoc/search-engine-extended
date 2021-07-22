@@ -38,4 +38,6 @@ func main(){
 	var vectorDocument = functions.TfIdf(valueTF,valueIDF)
 	fmt.Println(vectorDocument)
 	fmt.Println(functions.CosineSim(query,vectorDocument))
+
+	functions.DoWebScrape()
 }
