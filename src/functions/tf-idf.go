@@ -1,8 +1,10 @@
 package functions
 
 import (
-	"strings"
+	// "fmt"
 	"math"
+	"search-engine-extended/src/model"
+	"strings"
 )
 
 //fungsi antara untuk nentuin apakah suatu char ada di suatu kumpulan char
@@ -60,8 +62,8 @@ func countLogOfFreq(bagOfWord map[string]int) (map[string]float32, error){
 	return retVal, nil
 }
 
-func Tf(doc string) (map[string]float32, error){
-	bow,_ := countWords(doc)
+func Tf(doc model.Page) (map[string]float32, error){
+	bow,_ := countWords(doc.Body)
 	result,_ := countLogOfFreq(bow)
 
 	return result, nil
@@ -69,12 +71,12 @@ func Tf(doc string) (map[string]float32, error){
 
 //menerima inputan slice of string yang berisi banyak dokumen dan inputan kata-kata query. Akan dicari idf tiap-tiap kata
 //ASUMSI arrOfQuery telah "bersih" alias tidak ada stopwords
-func Idf(documents []string, arrOfQuery map[string]int) (map[string]float32)  {
+func Idf(documents []model.Page, arrOfQuery map[string]int) (map[string]float32)  {
 
 	//pertama-tama bikin slice of BoW dari masing-masing document dari documents
 	var bagOfWords []map[string]int
 	for _, doc := range documents{
-		bagOfWord,_ := countWords(doc)
+		bagOfWord,_ := countWords(doc.Body)
 		bagOfWords = append(bagOfWords, bagOfWord)
 	}
 
@@ -109,24 +111,34 @@ func TfIdf(valueTF map[string]float32, valueIDF map[string]float32) (map[string]
 }
 
 //harusnya di sini vektor query sama vectorDocument isinya dah sama
-func CosineSim(query map[string]int, vectorDocument map[string]float32) (float32){
+func CosineSim(query map[string]int, vectorDocument map[string]float32) (float64){
 	var dotProduct float32 = 0
 	for key,val := range query{
 		dotProduct += vectorDocument[key] * float32(val)
 	}
+	// fmt.Println(dotProduct)
 
 	var doubleLineQuery float32 = 0
 	for _,val := range query{
 		doubleLineQuery += float32(val*val)
 	}
 	doubleLineQuery = float32(math.Sqrt(float64(doubleLineQuery)))
+	// fmt.Println(doubleLineQuery)
 
 	var doubleLineDocument float32 = 0
 	for _,val := range vectorDocument{
 		doubleLineDocument += val*val
 	}
 	doubleLineDocument = float32(math.Sqrt(float64(doubleLineDocument)))
+	// fmt.Println(doubleLineDocument)
 
+	if doubleLineDocument==0.0 {
+		return 0
+	}
+	
+	doubleLine := doubleLineQuery*doubleLineDocument
+	// fmt.Println(dotProduct)
+	// fmt.Println(doubleLine)
 
-	return dotProduct / (doubleLineQuery*doubleLineDocument)
+	return float64(dotProduct) / float64(doubleLine)
 }
