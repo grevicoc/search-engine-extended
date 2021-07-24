@@ -1,7 +1,6 @@
 package functions
 
 import (
-	"fmt"
 	"search-engine-extended/src/model"
 )
 
@@ -17,7 +16,6 @@ func PageRank(documents *[]model.Page) {
 	for _,val := range mapDocuments{
 		countLinks := float32(len(val.LinksTo))
 		for _,link := range val.LinksTo{
-			fmt.Println(baseImportance)
 			mapDocuments[link].Importance += baseImportance / countLinks
 		}
 	}

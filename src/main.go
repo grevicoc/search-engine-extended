@@ -10,7 +10,8 @@ import (
 	"search-engine-extended/src/model"
 )
 
-//TODO cosine sim
+//TODO integrasiin heapsort sama model
+//TODO FRONTEND WEBSITE ASQYIAJDIDHIUWHDU
 func main(){
 	var testArray = []float32{0.27,11.1,5.4,6.02,3.01,3.01}
 	functions.HeapSort(testArray)
@@ -50,17 +51,10 @@ func main(){
 	}
 
 	functions.PageRank(&documents)
-	// fmt.Println(documents)
+	
 
 	for idx,doc := range documents{
-		// valueTF,_ := functions.Tf(doc)
-		// tfidf := functions.TfIdf(valueTF,valueIDF)
-		// doc.Relevancy = functions.CosineSim(query,tfidf)
-		// fmt.Println(valueTF)
-		// fmt.Println(valueIDF)
-		// fmt.Println(tfidf)
 		fmt.Printf("Document %d, Relevancy: %f | Importance: %f\n", idx, doc.Relevancy, doc.Importance)
-		// fmt.Println(" ")
 	}
 
 	/* WEBSCRAPING, UNCOMMENT UNTUK MELAKUKAN WEBSCRAPE*/
