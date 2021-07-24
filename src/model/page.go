@@ -9,6 +9,7 @@ type Page struct{
 	Body string			//ini berguna buat TF-IDF
 	URL string
 	LinksTo []string	//ini berguna buat pageRank Algorithm
-	Relevancy float64	//ini untuk nyimpen nilai pageRank Algorithm
+	Relevancy float32	//ini untuk nyimpen nilai cosineSim
+	Importance float32	//ini untuk nyimpen nilai pageRank Algorithm
 }
 

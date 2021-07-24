@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	// "log"
 	"os"
 	"search-engine-extended/src/functions"
 	"search-engine-extended/src/model"
@@ -30,13 +31,13 @@ func main(){
 	var documents []model.Page
 	json.Unmarshal(byteValue, &documents)
 
-	fmt.Println(documents)
+	// fmt.Println(documents)
 
 	//calculate tf-idf value and cosine-sim then save it on struct val
 	query := map[string]int{"jokowi":1,"covid":1,"19":1}
 	var valueIDF = functions.Idf(documents,query)
 
-	for _,doc := range documents{
+	for idx,doc := range documents{
 		valueTF,_ := functions.Tf(doc)
 		tfidf := functions.TfIdf(valueTF,valueIDF)
 		doc.Relevancy = functions.CosineSim(query,tfidf)
@@ -44,6 +45,21 @@ func main(){
 		// fmt.Println(valueIDF)
 		// fmt.Println(tfidf)
 		fmt.Println(doc.Relevancy)
+		// fmt.Println(" ")
+		documents[idx] = doc
+	}
+
+	functions.PageRank(&documents)
+	// fmt.Println(documents)
+
+	for idx,doc := range documents{
+		// valueTF,_ := functions.Tf(doc)
+		// tfidf := functions.TfIdf(valueTF,valueIDF)
+		// doc.Relevancy = functions.CosineSim(query,tfidf)
+		// fmt.Println(valueTF)
+		// fmt.Println(valueIDF)
+		// fmt.Println(tfidf)
+		fmt.Printf("Document %d, Relevancy: %f | Importance: %f\n", idx, doc.Relevancy, doc.Importance)
 		// fmt.Println(" ")
 	}
 

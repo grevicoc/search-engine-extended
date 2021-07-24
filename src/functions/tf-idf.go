@@ -111,7 +111,7 @@ func TfIdf(valueTF map[string]float32, valueIDF map[string]float32) (map[string]
 }
 
 //harusnya di sini vektor query sama vectorDocument isinya dah sama
-func CosineSim(query map[string]int, vectorDocument map[string]float32) (float64){
+func CosineSim(query map[string]int, vectorDocument map[string]float32) (float32){
 	var dotProduct float32 = 0
 	for key,val := range query{
 		dotProduct += vectorDocument[key] * float32(val)
@@ -140,5 +140,5 @@ func CosineSim(query map[string]int, vectorDocument map[string]float32) (float64
 	// fmt.Println(dotProduct)
 	// fmt.Println(doubleLine)
 
-	return float64(dotProduct) / float64(doubleLine)
+	return float32(dotProduct) / float32(doubleLine)
 }
