@@ -18,7 +18,7 @@ func contains(char rune, word []rune) (bool){
 }
 
 //fungsi untuk menghitung suatu dokumen ada kata apa saja dan jumlahnya berapa
-func countWords(doc string) (map[string]int, error){
+func CountWords(doc string) (map[string]int, error){
 	//inisialisasi retval
 	var retVal map[string]int = map[string]int{}
 
@@ -39,6 +39,10 @@ func countWords(doc string) (map[string]int, error){
 			retVal[tempWord]++
 			tempWord = ""
 		}
+	}
+
+	if tempWord!=""{
+		retVal[tempWord]++
 	}
 
 	return retVal, nil
@@ -63,7 +67,7 @@ func countLogOfFreq(bagOfWord map[string]int) (map[string]float32, error){
 }
 
 func Tf(doc model.Page) (map[string]float32, error){
-	bow,_ := countWords(doc.Body)
+	bow,_ := CountWords(doc.Body)
 	result,_ := countLogOfFreq(bow)
 
 	return result, nil
@@ -76,20 +80,21 @@ func Idf(documents []model.Page, arrOfQuery map[string]int) (map[string]float32)
 	//pertama-tama bikin slice of BoW dari masing-masing document dari documents
 	var bagOfWords []map[string]int
 	for _, doc := range documents{
-		bagOfWord,_ := countWords(doc.Body)
+		bagOfWord,_ := CountWords(doc.Body)
 		bagOfWords = append(bagOfWords, bagOfWord)
 	}
 
 	//selanjutnya bikin retval
 	var retVal map[string]float32 = map[string]float32{}
-	for key := range arrOfQuery {		var count = 0
+	for key := range arrOfQuery {		
+		var count = 0
 		for _, bow := range bagOfWords{
 			//ngecek apakah di dalam bow tersebut ada word yg dimaksud
 			if bow[key]!=0{
 				count++
 			}
 		}
-		retVal[key] = float32(math.Log(float64(len(documents)) / float64(count)))
+		retVal[key] = float32(math.Log(float64(len(documents)) / float64(count+1)))
 		
 	}
 
@@ -115,6 +120,7 @@ func CosineSim(query map[string]int, vectorDocument map[string]float32) (float32
 	var dotProduct float32 = 0
 	for key,val := range query{
 		dotProduct += vectorDocument[key] * float32(val)
+		// fmt.Println(key, val)
 	}
 	// fmt.Println(dotProduct)
 
@@ -137,6 +143,7 @@ func CosineSim(query map[string]int, vectorDocument map[string]float32) (float32
 	}
 	
 	doubleLine := doubleLineQuery*doubleLineDocument
+
 	// fmt.Println(dotProduct)
 	// fmt.Println(doubleLine)
 

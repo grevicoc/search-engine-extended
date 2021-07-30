@@ -1,0 +1,34 @@
+{{define "index"}}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Search Engine</title>
+        <link rel="stylesheet" href="/static/index.css" />
+        <link rel="stylesheet" href="/static/_page.css" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        
+        <div class="root">
+            
+            <div class="header">
+                <p>Search Engine Extended grevi Ver.</p>
+            </div>
+            <div class="input-query">
+                <form action="/result" method="GET" class="searchbar">
+                    <label for="gsearch"></label>
+                    <input type="search" name="searchbar" id="gsearch">
+                </form>
+            </div>
+            <div class="result">
+                {{range $index, $elem := .results}}
+                    {{template "_page" $elem}},
+                {{end}}
+            </div>
+        </div>
+    </body>
+</html>
+{{end}}
