@@ -58,7 +58,7 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#run-local">Run Local</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -66,7 +66,6 @@
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
 
@@ -75,20 +74,14 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![product-screenshot](images/search-engine1.png)
 
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`github_username`, `repo_name`, `twitter_handle`, `email`, `project_title`, `project_description`
+A search engine that implements heapsort for sorting, TF-IDF for vectorizing, and cosine-sim with little touch pagerank algorithm for valuing relevancies between query and document.
 
 
 ### Built With
 
-* []()
-* []()
-* []()
-
-
+* Golang
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -97,25 +90,23 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+* Golang, install with this tutorial https://golang.org/doc/install
 
-### Installation
+### Run Local
 
 1. Clone the repo
    ```sh
    git clone https://github.com/grevicoc/search-engine-extended.git
    ```
-2. Install NPM packages
+2. Go to main package
    ```sh
-   npm install
+   cd search-engine-extended/src
    ```
-
-
-
+3. Run main
+   ```sh
+   go run main.go
+   ```
+  
 <!-- USAGE EXAMPLES -->
 ## Usage
 
@@ -131,7 +122,6 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 See the [open issues](https://github.com/grevicoc/search-engine-extended/issues) for a list of proposed features (and known issues).
 
 
-
 <!-- CONTRIBUTING -->
 ## Contributing
 
@@ -144,32 +134,17 @@ Contributions are what make the open source community such an amazing place to b
 5. Open a Pull Request
 
 
-
 <!-- LICENSE -->
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-
-
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email
+Muhammad Tito Prakasa - muhammadtitoprks@gmail.com
 
 Project Link: [https://github.com/grevicoc/search-engine-extended](https://github.com/grevicoc/search-engine-extended)
-
-
-
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-
-* []()
-* []()
-* []()
-
-
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
